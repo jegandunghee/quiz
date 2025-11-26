@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/quiz/static/css/main.327a145c.css",
+    "main.js": "/quiz/static/js/main.93775acb.js",
+    "static/media/ChungjuKimSaeng.ttf": "/quiz/static/media/ChungjuKimSaeng.6835733518379e64234e.ttf",
+    "static/media/quiz_1.png": "/quiz/static/media/quiz_1.d510ce6760ec8a1bcb43.png",
+    "static/media/quiz_2.png": "/quiz/static/media/quiz_2.8ac369544374ec8cd7a4.png",
+    "static/media/quiz_3.png": "/quiz/static/media/quiz_3.bc3031410304d663b8d5.png",
+    "index.html": "/quiz/index.html",
+    "main.327a145c.css.map": "/quiz/static/css/main.327a145c.css.map",
+    "main.93775acb.js.map": "/quiz/static/js/main.93775acb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.327a145c.css",
+    "static/js/main.93775acb.js"
+  ]
+}
