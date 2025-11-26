@@ -1,8 +1,12 @@
-const Results = ({onReStart}) => {
+const Results = ({onReStart, score}) => {
   return (
     <div id="result">
-      <p>퀴즈 종료</p>
-      <button onClick={onReStart}>다시시작</button>
+      <h3>시험 종료</h3>
+      <h1>점수 : {score}점</h1>
+      <div className="btn_wrap">
+        <p className="btn" onClick={ () => {onReStart(false)} }>HOME</p>
+        <p className="btn" onClick={() => {onReStart(true)}}>다시하기</p>
+      </div>
     </div>
   )
 }

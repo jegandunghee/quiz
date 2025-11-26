@@ -3,21 +3,53 @@
 a{ text-decoration: none; color: inherit;}
 ol,ul{ list-style: none;}
 
+@font-face {
+    font-family: 'ChungjuKimsaeng';
+    src: url('./font/ChungjuKimSaeng.ttf') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+body{
+  font-family: 'ChungjuKimsaeng';
+  text-shadow: 0 2px 10px  rgba(0, 0, 0, 25%);
+  color: #fff;
+}
+
 
 /* 투명 버튼 class 설정 */
 .btn{
   width: 280px;
   height: 80px;
-  padding: 1rem 1.5rem;
-  color: #fff;
+  padding: 1.5rem;
+  
   text-align: center;
   box-sizing: border-box;
   background-color: rgba(255, 255, 255, 10%);
   border-radius: 50px;
-  box-shadow: 1px 2px 8px 0 rgba(0, 0, 0, 15%);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 15%);
 
   &:hover{
   background-color: rgba(255, 255, 255, 30%);
+  }
+}
+
+/* 문제 항목 class 설정  */
+.item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  padding: 6px 12px;
+  background-color: rgba(217, 215, 244, 0.5);
+  border-radius: 1rem;
+  font-weight: 300;
+  font-size: 20px;
+  text-align: center;
+
+  &:hover{
+    background-color: rgba(217, 215, 244, 80%);
   }
 }
 
@@ -26,17 +58,47 @@ ol,ul{ list-style: none;}
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #333;
 }
-/* app */
+
+.bg{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 217, 0, 0.19) 0%, rgba(0, 0, 0, 0.08) 100%), #D59F98;
+  
+}
+.bg-1{
+  background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 217, 0, 0.19) 0%, rgba(0, 0, 0, 0.08) 100%), #D59F98;
+  /* background-image: url(../public/img/dest_bg.png); */
+}
+.bg-2{
+  background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 225, 0, 0.1) 0%, rgba(0, 0, 0, 0.12) 100%), #896E93;
+}
+.bg-3{
+  background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 251, 139, 0.2) 0%, rgba(0, 0, 0, 0.15) 100%), #452C76;
+}
+.bg-4{
+  background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 215, 128, 0.2) 0%, rgba(0, 0, 0, 0.15) 100%), #43627E;
+}
+.bg-5{
+  background: radial-gradient(49.41% 31.76% at 50% 50%, rgba(255, 255, 255, 0.45) 0%, rgba(32, 43, 67, 0.18) 100%), #ABBDD7;
+}
+
+
+/* app 영역 */
 #app{
   width: 360px;
   height: 640px;
-  box-shadow: 0 2px 10px 1px #555;
+  box-shadow: 1px 2px 10px 1px #777;
+  /* box-shadow: 2px 2px 30px 10px #ffffff; */
   border-radius: 1rem;
   overflow: hidden;
 }
 
+/* 첫화면 */
 #start{
   width: 100%;
   height: 100%;
@@ -47,29 +109,128 @@ ol,ul{ list-style: none;}
 
   p.title{
     text-align: center;
-    padding: 7.5rem 0;
-    color: #fff;
+    padding: 8rem 0;
     font-size: 48px;
-    font-weight: bold;
+    line-height: 4rem;
   }
 
   .goCategory {
     margin: auto;
     font-size: 40px;
-    font-weight: bold;
-    line-height: 2.8rem;
+    line-height: 2rem;
   }
 }
 
+/* 과목 선택 영역 */
 #categories{  
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to top, 
+    rgba(53, 12, 81, 0.4) 0%,
+    rgba(2, 0, 20, 0.9) 100%),
+    url(../public/img/quiz_1.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  h2{
+    padding: 2.5rem 0;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 200;
+
+  }
   ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1.5rem;
+    
     li{
+      line-height: 2.1rem;
       cursor: pointer;
-      margin: 0.5rem 0;
+      font-size: 40px;
     }
   }
 }
 
+/* 문제 페이지 */
+#quiz-page{
+  width: 100%;
+  height: 100%;
+  background-image: url(../public/img/quiz_2.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  /* 문제 번호 */
+  p.qNum{
+    padding: 2rem 1rem;
+    color: #C1B1CA;
+  }
+
+  /* 문제 */
+  h3{
+    margin: 1rem 2rem;
+    font-size: 2.2rem;
+    font-weight: 300;
+  }
+
+  /* 선택 항목 전체 영역 */
+  ul.choices{
+    padding: 1.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 50px 40px;
+  }
+}
+
+#result{
+  width: 100%;
+  height: 100%;
+  background-image: url(../public/img/quiz_3.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  h3{
+    padding-top: 7rem;
+    font-size: 36px;
+    font-weight: 300;
+    text-align: center;
+
+  }
+
+  h1{
+    text-align: center;
+    font-size: 58px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    padding: 5.5rem 0;
+  }
+
+  .btn_wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    p.btn{
+      width: 150px;
+      height: 50px;
+      line-height: 50px;
+      padding: 0;
+      font-size: 24px;
+  }
+
+  }
+  
+}
+
+/* 반응형 */
 @media all and (max-width:360px) {
   #app{
     width: 100%;
