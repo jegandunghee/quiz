@@ -20,7 +20,8 @@ const QuizPage = ({quizes,onFinish,onScore, onLastQuestion}) => {
     const nextIdx = current +1;
 
     //마지막 문제인지 확인하기 
-    const isLast = nextIdx === quizes.length -1;
+    // 4번에서 바꿔주고 5번에서 보여지도록 처리하기 
+    const isLast = nextIdx === quizes.length -1 ;
     onLastQuestion(isLast);
 
     
