@@ -1,105 +1,127 @@
 @charset "utf-8";
-*{ margin: 0; padding: 0;}
-a{ text-decoration: none; color: inherit;}
-ol,ul{ list-style: none;}
+*{ margin: 0; padding: 0; box-sizing: border-box; }
+a{ text-decoration: none; color: inherit; }
+ol, ul{ list-style: none; }
+button { border: none; cursor: pointer; background: none; font-family: inherit; }
 
 @font-face {
-    font-family: 'ChungjuKimsaeng';
-    src: url('./font/ChungjuKimSaeng.ttf') format('woff2');
-    font-weight: normal;
-    font-display: swap;
+  font-family: 'ChungjuKimsaeng';
+  src: url('./font/ChungjuKimSaeng.ttf') format('woff2');
+  font-weight: normal;
+  font-display: swap;
 }
 
-body{
+body {
   font-family: 'ChungjuKimsaeng';
-  text-shadow: 0 2px 10px  rgba(0, 0, 0, 25%);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 25%);
   color: #fff;
 }
 
-
-/* 투명 버튼 class 설정 */
-.btn{
+/* ========================
+   공통 버튼 클래스
+======================== */
+.btn {
   width: 280px;
   height: 80px;
   padding: 1.5rem;
-  
   text-align: center;
-  box-sizing: border-box;
   background-color: rgba(255, 255, 255, 10%);
   border-radius: 50px;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 15%);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 
-  &:hover{
-  background-color: rgba(255, 255, 255, 30%);
+  &:hover {
+    background-color: rgba(255, 255, 255, 30%);
   }
 }
 
-/* 문제 항목 class 설정  */
-.item{
+/* 문제 항목 클래스 */
+.item {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   padding: 6px 12px;
   background-color: rgba(217, 215, 244, 0.5);
   border-radius: 1rem;
   font-weight: 300;
   font-size: 20px;
   text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
 
-  &:hover{
+  &:hover {
     background-color: rgba(217, 215, 244, 80%);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.97);
   }
 }
 
-#root{
+#root {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.bg{
+/* ========================
+   배경 클래스
+======================== */
+.bg {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background 0.6s ease;
+}
 
+.bg-1 {
   background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 217, 0, 0.19) 0%, rgba(0, 0, 0, 0.08) 100%), #D59F98;
-  
 }
-.bg-1{
-  background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 217, 0, 0.19) 0%, rgba(0, 0, 0, 0.08) 100%), #D59F98;
-  /* background-image: url(../public/img/dest_bg.png); */
-}
-.bg-2{
+.bg-2 {
   background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 225, 0, 0.1) 0%, rgba(0, 0, 0, 0.12) 100%), #896E93;
 }
-.bg-3{
-  background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 251, 139, 0.2) 0%, rgba(0, 0, 0, 0.15) 100%), #452C76;
+.bg-3 {
+  /* 퀴즈 1~4 화면: 어두운 퍼플 그라디언트 */
+  background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 251, 139, 0.15) 0%, rgba(0, 0, 0, 0.2) 100%), #452C76;
 }
-.bg-4{
-  background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 215, 128, 0.2) 0%, rgba(0, 0, 0, 0.15) 100%), #43627E;
+.bg-4 {
+  /* 마지막 문제(5/5) 화면 배경 */
+  background-image: url(../public/img/quiz_last_page.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-.bg-5{
+.bg-5 {
   background: radial-gradient(49.41% 31.76% at 50% 50%, rgba(255, 255, 255, 0.45) 0%, rgba(32, 43, 67, 0.18) 100%), #ABBDD7;
 }
 
+/* 해설 화면: 데스크탑에서 카드 바깥에 보이는 어두운 네이비 배경 */
+.bg-review {
+  background: radial-gradient(ellipse at 50% 60%, #3b4e6e 0%, #1e2d45 60%, #111827 100%);
+}
 
-/* app 영역 */
-#app{
+/* ========================
+   앱 전체 컨테이너
+======================== */
+#app {
   width: 360px;
   height: 640px;
   box-shadow: 1px 2px 10px 1px #777;
-  /* box-shadow: 2px 2px 30px 10px #ffffff; */
   border-radius: 1rem;
   overflow: hidden;
 }
 
-/* 첫화면 */
-#start{
+/* ========================
+   첫 화면 (Start)
+======================== */
+#start {
   width: 100%;
   height: 100%;
   background-image: url(../public/img/quiz_1.png);
@@ -107,7 +129,7 @@ body{
   background-size: cover;
   background-repeat: no-repeat;
 
-  p.title{
+  p.title {
     text-align: center;
     padding: 8rem 0;
     font-size: 48px;
@@ -121,33 +143,36 @@ body{
   }
 }
 
-/* 과목 선택 영역 */
-#categories{  
+/* ========================
+   과목 선택 화면 (Categories)
+======================== */
+#categories {
   width: 100%;
   height: 100%;
   background: linear-gradient(
-    to top, 
+    to top,
     rgba(53, 12, 81, 0.4) 0%,
     rgba(2, 0, 20, 0.9) 100%),
-    url(../public/img/quiz_1.png);
+    url(../public/img/quiz_2.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  h2{
+
+  h2 {
     padding: 2.5rem 0;
     text-align: center;
     font-size: 36px;
     font-weight: 200;
-
   }
-  ul{
+
+  ul {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     gap: 1.5rem;
-    
-    li{
+
+    li {
       line-height: 2.1rem;
       cursor: pointer;
       font-size: 40px;
@@ -155,87 +180,358 @@ body{
   }
 }
 
-/* 문제 페이지 */
-#quiz-page{
+/* ========================
+   퀴즈 풀이 화면 (QuizPage)
+======================== */
+#quiz-page {
   width: 100%;
   height: 100%;
-  background-image: url(../public/img/quiz_2.png);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-
-  /* 문제 번호 */
-  p.qNum{
-    padding: 2rem 1rem;
-    color: #C1B1CA;
-  }
-
-  /* 문제 */
-  h3{
-    margin: 1rem 2rem;
-    font-size: 2.2rem;
-    font-weight: 300;
-  }
-
-  /* 선택 항목 전체 영역 */
-  ul.choices{
-    padding: 1.5rem 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 50px 40px;
-  }
+  /* 배경은 바깥 .bg-3 / .bg-4 에서 통합 관리 */
+  background: transparent;
+  display: flex;
+  flex-direction: column;
 }
 
-#result{
+/* 상단 문제 번호 + 프로그레스 바 영역 */
+.quiz-top {
+  padding: 2rem 1.2rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+p.qNum {
+  color: #C1B1CA;
+  font-size: 14px;
+}
+
+/* 프로그레스 바 */
+.progress-bar-wrap {
+  width: 100%;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #c084fc, #f0abfc);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* 문제 + 보기 컨텐츠 영역 (fade-in 애니메이션 적용) */
+.quiz-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.4s ease;
+}
+
+.quiz-content h3 {
+  margin: 1rem 2rem;
+  font-size: 2.2rem;
+  font-weight: 300;
+}
+
+/* 선택 항목 전체 영역: 항상 2x2 그리드 */
+ul.choices {
+  padding: 1.5rem 1.2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+/* ========================
+   결과 화면 (Results)
+======================== */
+#result {
   width: 100%;
   height: 100%;
   background-image: url(../public/img/quiz_3.png);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.5s ease;
 
-  h3{
+  h3 {
     padding-top: 7rem;
     font-size: 36px;
     font-weight: 300;
     text-align: center;
-
   }
 
-  h1{
+  h1 {
     text-align: center;
     font-size: 58px;
     letter-spacing: 2px;
     font-weight: 300;
-    padding: 5.5rem 0;
+    padding: 5.5rem 0 3rem;
   }
 
-  .btn_wrap{
+  .btn_wrap {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
 
-    p.btn{
+    p.btn {
       width: 150px;
       height: 50px;
       line-height: 50px;
       padding: 0;
       font-size: 24px;
+    }
   }
 
+  /* 해설 보러가기 버튼 영역 */
+  .review-btn-wrap {
+    margin-top: 1.2rem;
+
+    .review-btn {
+      width: 220px;
+      height: 50px;
+      line-height: 50px;
+      padding: 0;
+      font-size: 20px;
+    }
   }
-  
 }
 
-/* 반응형 */
-@media all and (max-width:360px) {
-  #app{
+/* ========================
+   해설 화면 (Review)
+======================== */
+#review {
+  width: 100%;
+  height: 100%;
+  /* review_bg.png를 컴포넌트 레벨에서 직접 적용 (모바일 전체화면 + 데스크탑 카드 내부 모두 적용) */
+  background-image: url(../public/img/review_bg.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #0a1628;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* 해설 상단 헤더 */
+.review-header {
+  padding: 1.5rem 1.4rem 0.8rem;
+}
+
+.review-qNum {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.03em;
+}
+
+/* 해설 카드 (fade-in 애니메이션 적용) */
+.review-card {
+  flex: 1;
+  padding: 0 1.2rem;
+  overflow-y: auto;
+  animation: fadeIn 0.4s ease;
+
+  /* 스크롤바 커스텀 */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.3) transparent;
+}
+
+.review-card::-webkit-scrollbar {
+  width: 4px;
+}
+
+.review-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.review-card::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 999px;
+}
+
+/* 문제 텍스트 */
+.review-question {
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* 보기 4개 그리드 */
+.review-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* 보기 항목 (기본: 회색톤) */
+.review-choice-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0.6rem 0.5rem;
+  min-height: 48px;
+  font-size: 15px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.3;
+}
+
+/* 정답 보기: 붉은 톤 강조 */
+.review-choice-item.correct-choice {
+  background-color: rgba(169, 93, 93, 0.75);
+  color: #fff;
+  font-weight: 500;
+}
+
+/* 해설 섹션 */
+.review-explanation-section {
+  margin-top: 0.3rem;
+}
+
+.review-explanation-title {
+  text-align: center;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+/* 해설 박스 */
+.review-explanation-box {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+}
+
+/* 해설 텍스트 */
+.explanation-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* 해설 각 문장 */
+.explanation-sentence {
+  font-size: 13px;
+  color: #1a1a2e;
+  line-height: 1.5;
+  text-shadow: none;
+}
+
+/* 정답에 해당하는 해설 문장: 붉은 밑줄 */
+.explanation-sentence.correct-sentence {
+  color: #7a0000;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: #a95d5d;
+  text-underline-offset: 3px;
+}
+
+/* ========================
+   해설 화면 하단 네비게이션
+======================== */
+.review-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.8rem 1rem;
+  flex-shrink: 0;
+}
+
+.review-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 20px;
+  font-family: inherit;
+  text-shadow: none;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-nav-btn:hover:not(.disabled) {
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+.review-nav-btn.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.review-home-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-family: 'ChungjuKimsaeng';
+  font-size: 18px;
+  border-radius: 30px;
+  padding: 0.5rem 1.5rem;
+  transition: background-color 0.2s ease;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.review-home-btn:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+/* ========================
+   Fade-in 애니메이션
+======================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================
+   반응형
+======================== */
+
+/* 모바일 (640px 이하): 컴포넌트가 전체 화면을 채움 */
+@media all and (max-width: 640px) {
+  #root {
+    height: 100dvh;
+  }
+
+  #app {
     width: 100%;
     height: 100%;
-    border: none;
     border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+/* 데스크탑 (641px 이상): 외부 배경 + 중앙 카드 */
+@media all and (min-width: 641px) {
+  #app {
+    width: 360px;
+    height: 640px;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
   }
 }

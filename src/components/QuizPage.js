@@ -1,55 +1,73 @@
 import { useState } from "react"
 
-const QuizPage = ({quizes,onFinish,onScore, onLastQuestion}) => {
+const QuizPage = ({quizes, onFinish, onScore, onLastQuestion}) => {
 
   // 문제 번호 지정, 기본값 0
-  // current++를 지정한적이 없는데 어떻게 문제가 바뀌는지..?
-  // 클릭 한번당 +1   
-  const [current,setCurrent] = useState(0);
+  const [current, setCurrent] = useState(0);
 
-  const handleClick = (idx)=>{
-    //정답 체크 
-    //idx : user가 선택한 항목의 인덱스 값을 받음 
-    // idx의 값이 quizes[current]의 correct의 값과 같다면 점수 +20을 함 
-    if(idx+1 === quizes[current].correct){
-      //정답이면 +20
+  // 답변 선택 후 피드백 잠금 (연속 클릭 방지)
+  const [answered, setAnswered] = useState(false);
+
+  const handleClick = (idx) => {
+    if (answered) return; // 이미 선택했으면 무시
+    setAnswered(true);
+
+    // 정답 체크: idx는 0-based, correct는 1-based
+    if (idx + 1 === quizes[current].correct) {
       onScore();
     }
 
-    //다음에 나올 화면의 idx번호를 미리 받음 
-    const nextIdx = current +1;
+    // 다음 문제 인덱스
+    const nextIdx = current + 1;
 
-    //마지막 문제인지 확인하기 
-    // 4번에서 바꿔주고 5번에서 보여지도록 처리하기 
-    const isLast = nextIdx === quizes.length -1 ;
+    // 마지막 문제 여부 확인
+    const isLast = nextIdx === quizes.length - 1;
     onLastQuestion(isLast);
 
-    
-    // current의 값이 quizes의 값을 넘으면 마지막 페이지로 이동
-    if( nextIdx < quizes.length ){
-      setCurrent(nextIdx);
-    } else {
-      onFinish(true);
-    }
+    // 0.5초 뒤 다음 문제로 이동
+    setTimeout(() => {
+      if (nextIdx < quizes.length) {
+        setCurrent(nextIdx);
+        setAnswered(false);
+      } else {
+        onFinish(true);
+      }
+    }, 500);
   }
+
+  // 진행률 계산 (1번 문제부터 가득 차도록)
+  const progress = ((current + 1) / quizes.length) * 100;
 
   return (
     <div id="quiz-page">
+      {/* 상단: 문제 번호 + 프로그레스 바 */}
+      <div className="quiz-top">
+        <p className="qNum">문제 ({current + 1}/{quizes.length})</p>
+        <div className="progress-bar-wrap">
+          <div
+            className="progress-bar-fill"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
 
-      <p className="qNum">문제 ({current+1}/{quizes.length})</p>
+      {/* 문제 + 보기: key에 current를 줘서 문제 바뀔 때마다 fade-in 트리거 */}
+      <div className="quiz-content fade-in" key={current}>
+        <h3>{quizes[current].question}</h3>
 
-      <h3>{quizes[current].question}</h3>
-
-      <ul className="choices">
-        {
-          quizes[current].choices.map((item,idx)=>{
-            return (
-              <li className="item" key={idx} 
-                onClick={ () =>{handleClick(idx)}}>{item}</li>
-            )
-          })
-        }
-      </ul>
+        <ul className="choices">
+          {quizes[current].choices.map((item, idx) => (
+            <li
+              className="item"
+              key={idx}
+              id={`choice-${idx}`}
+              onClick={() => handleClick(idx)}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
