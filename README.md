@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# 한국어 입문자용 퀴즈 앱 (Korean Beginner Quiz App)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+입문자 수준의 한국어 학습자를 위한 인터랙티브 퀴즈 웹 애플리케이션입니다. **반응형 웹 디자인(Responsive Web Design)**이 적용되어 데스크탑과 모바일 환경 모두에서 최적화된 화면을 제공하며, **React의 다양한 훅(Hooks)**을 적극 활용하여 동적이고 매끄러운 UI/UX를 구현한 프로젝트입니다.
 
-## Available Scripts
+## 프로젝트 개요
+이 앱은 한국어 입문자를 위해 자음/모음, 발음, 단어/어휘, 문장/표현 등 다양한 카테고리의 퀴즈를 제공합니다. 사용자는 원하는 과목을 선택하여 퀴즈를 풀고, 결과 화면에서 점수를 확인한 뒤 상세한 해설을 볼 수 있습니다.
 
-In the project directory, you can run:
+## 사용 기술 및 라이브러리
+- **Language / Library**: React.js (JavaScript)
+- **Styling**: Vanilla CSS (CSS3)
+- **Animation Effect**: `react-confetti` (점수 달성 시 꽃가루 이펙트), `react-use` (윈도우 사이즈 측정용 훅)
+- **Data**: 로컬 JSON 파일 연동 (`quizData.json`)
 
-### `npm start`
+## 주요 기능 및 구현 로직
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. 동적 배경 전환 (Dynamic Background Rendering)
+- 애플리케이션의 현재 상태(시작, 카테고리 선택, 퀴즈 풀이, 결과창, 해설창)에 따라 `App.js`에서 동적으로 CSS 클래스(`bg-1` ~ `bg-5`, `bg-review`)를 주입합니다.
+- 단순한 단색 배경이 아닌 `radial-gradient`와 커스텀 이미지를 조합하여 각 화면의 성격에 맞는 부드러운 분위기를 연출합니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 2. 해설 화면의 스마트 텍스트 파싱 (Smart Text Parsing & Highlighting)
+- 이 프로젝트에서 가장 도드라지는 기능 중 하나입니다. 사용자가 해설을 볼 때 단순히 긴 텍스트를 통째로 읽는 것이 아니라, 시스템이 문장 단위를 파싱(split)하여 정답과 관련된 문장만 찾아냅니다.
+- 정답에 해당하는 핵심 해설 문장에만 자동으로 붉은색 밑줄과 강조(Highlight) 효과를 부여하여, 사용자가 '왜 이 보기가 정답인지' 브라우저 상에서 즉각적이고 직관적으로 파악할 수 있도록 돕습니다.
 
-### `npm test`
+### 3. 사용자 경험(UX)을 고려한 타이머 로직과 진행률 표시
+- **지연 효과(Timeout)**: 사용자가 보기를 클릭했을 때, 바로 다음 문제로 넘어가면 정답 피드백을 인식하기 어렵습니다. 이를 방지하기 위해 `setTimeout`을 사용하여 0.5초의 딜레이를 두고 다음 문제로 자연스럽게 페이드인 되도록 구현했습니다.
+- **프로그레스 바(Progress Bar)**: 현재 푼 문제의 개수와 전체 문제의 개수를 비례식으로 계산하여 `width: ${progress}%` 형태로 프로그레스 바를 동적으로 채웁니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 4. React Hooks를 활용한 유기적인 상태 관리
+- **`useState` 훅의 적극적인 활용**: 사용자의 현재 퀴즈 진행 상태, 획득한 점수, 선택한 카테고리, 그리고 화면 전환(퀴즈 창 ↔ 결과 창 ↔ 해설 창) 등 앱 구동에 필요한 모든 동적 데이터를 `useState` 훅을 통해 빈틈없이 관리합니다.
+- 부모 컴포넌트에서 상태를 중앙 제어하고, 하위 UI 요소들에는 렌더링에 필요한 최소한의 데이터만 전달하여 앱이 가볍고 빠르게 반응하도록 설계했습니다.
 
-### `npm run build`
+## 화면 구성
+1. **시작 화면 (`Start.js`)**: 앱 타이틀 및 과목 선택 화면으로 넘어가는 메인 화면
+2. **카테고리 화면 (`Categories.js`)**: JSON 데이터를 순회(map)하여 퀴즈 주제 버튼을 렌더링
+3. **퀴즈 화면 (`QuizPage.js`)**: 문제와 보기 렌더링 및 프로그레스 바 업데이트
+4. **결과 화면 (`Results.js`)**: 조건부 렌더링을 통해 50점 이상 획득 시 화면 전체에 Confetti(꽃가루) 효과 발생
+5. **해설 화면 (`Review.js`)**: 이전/다음 버튼 네비게이션과 정답 문장 하이라이팅 기능 제공
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 로컬 실행 방법
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+이 프로젝트는 [Create React App]으로 생성되었습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1. 패키지 설치
+```bash
+npm install
+```
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 2. 개발 서버 실행
+```bash
+npm start
+```
+- 브라우저에서 [http://localhost:3000](http://localhost:3000)으로 접속하여 앱을 확인할 수 있습니다.

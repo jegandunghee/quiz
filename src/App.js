@@ -25,8 +25,7 @@ const App = () => {
   // 점수
   const [score, setScore] = useState(0);
 
-  // 마지막 문제 화면 state
-  const [lastQuestion, setLastQuestion] = useState(false);
+
 
   // 해설 화면 표시 여부
   const [showReview, setShowReview] = useState(false);
@@ -40,17 +39,16 @@ const App = () => {
     setfilterQuiz(quizes);
   }
 
-  // 다시 시작 함수
+  // 초기화 및 다시 시작 기능
   const handleReStart = (state) => {
     setCategory('');
     setFinish(false);
     setScore(0);
     setStart(state);
-    setLastQuestion(false);
     setShowReview(false);
   }
 
-  // 퀴즈 점수 반영 함수
+  // 정답을 맞췄을 때 점수를 20점씩 증가시키는 함수
   const handleScore = () => {
     setScore((prev) => prev + 20);
   }
@@ -67,10 +65,8 @@ const App = () => {
     bgClass = "bg bg-review";        // 해설 화면
   } else if (start && !category && !finish) {
     bgClass = "bg bg-2";             // 카테고리 화면
-  } else if (start && category && !finish && !lastQuestion) {
-    bgClass = "bg bg-3";             // 문제 화면
-  } else if (start && category && !finish && lastQuestion) {
-    bgClass = "bg bg-4";             // 마지막 문제 화면
+  } else if (start && category && !finish) {
+    bgClass = "bg bg-3";             // 문제 화면 (1~5 모두 동일)
   } else if (finish) {
     bgClass = "bg bg-5";             // 점수 화면
   } else {
@@ -97,7 +93,6 @@ const App = () => {
             quizes={filterQuiz}
             onFinish={setFinish}
             onScore={handleScore}
-            onLastQuestion={setLastQuestion}
           />
         }
 

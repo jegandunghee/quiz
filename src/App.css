@@ -1,8 +1,27 @@
 @charset "utf-8";
-*{ margin: 0; padding: 0; box-sizing: border-box; }
-a{ text-decoration: none; color: inherit; }
-ol, ul{ list-style: none; }
-button { border: none; cursor: pointer; background: none; font-family: inherit; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background: none;
+  font-family: inherit;
+}
 
 @font-face {
   font-family: 'ChungjuKimsaeng';
@@ -84,20 +103,16 @@ body {
 .bg-1 {
   background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 217, 0, 0.19) 0%, rgba(0, 0, 0, 0.08) 100%), #D59F98;
 }
+
 .bg-2 {
   background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 225, 0, 0.1) 0%, rgba(0, 0, 0, 0.12) 100%), #896E93;
 }
+
 .bg-3 {
-  /* 퀴즈 1~4 화면: 어두운 퍼플 그라디언트 */
+  /* 퀴즈 1~4 화면: 어두운 퍼플 그라데이션 */
   background: radial-gradient(64% 39.06% at 50% 50%, rgba(255, 251, 139, 0.15) 0%, rgba(0, 0, 0, 0.2) 100%), #452C76;
 }
-.bg-4 {
-  /* 마지막 문제(5/5) 화면 배경 */
-  background-image: url(../public/img/quiz_last_page.png);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
+
 .bg-5 {
   background: radial-gradient(49.41% 31.76% at 50% 50%, rgba(255, 255, 255, 0.45) 0%, rgba(32, 43, 67, 0.18) 100%), #ABBDD7;
 }
@@ -149,10 +164,9 @@ body {
 #categories {
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to top,
-    rgba(53, 12, 81, 0.4) 0%,
-    rgba(2, 0, 20, 0.9) 100%),
+  background: linear-gradient(to top,
+      rgba(53, 12, 81, 0.4) 0%,
+      rgba(2, 0, 20, 0.9) 100%),
     url(../public/img/quiz_2.png);
   background-position: center;
   background-repeat: no-repeat;
@@ -342,7 +356,7 @@ ul.choices {
 
   /* 스크롤바 커스텀 */
   scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.3) transparent;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
 }
 
 .review-card::-webkit-scrollbar {
@@ -354,7 +368,7 @@ ul.choices {
 }
 
 .review-card::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 999px;
 }
 
@@ -365,7 +379,7 @@ ul.choices {
   line-height: 1.6;
   margin-bottom: 1rem;
   color: #fff;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* 보기 4개 그리드 */
@@ -487,7 +501,7 @@ ul.choices {
   border-radius: 30px;
   padding: 0.5rem 1.5rem;
   transition: background-color 0.2s ease;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .review-home-btn:hover {
@@ -502,6 +516,7 @@ ul.choices {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -512,7 +527,7 @@ ul.choices {
    반응형
 ======================== */
 
-/* 모바일 (640px 이하): 컴포넌트가 전체 화면을 채움 */
+/* 모바일 (640px 이하): 컴포넌트가 전체 화면을 채우도록 */
 @media all and (max-width: 640px) {
   #root {
     height: 100dvh;

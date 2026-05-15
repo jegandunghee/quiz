@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const QuizPage = ({quizes, onFinish, onScore, onLastQuestion}) => {
+const QuizPage = ({quizes, onFinish, onScore}) => {
 
   // 문제 번호 지정, 기본값 0
   const [current, setCurrent] = useState(0);
@@ -20,11 +20,8 @@ const QuizPage = ({quizes, onFinish, onScore, onLastQuestion}) => {
     // 다음 문제 인덱스
     const nextIdx = current + 1;
 
-    // 마지막 문제 여부 확인
-    const isLast = nextIdx === quizes.length - 1;
-    onLastQuestion(isLast);
 
-    // 0.5초 뒤 다음 문제로 이동
+    // 0.5초 대기 후 다음 문제로 넘어가거나(퀴즈 진행), 마지막 문제라면 결과 화면으로 이동
     setTimeout(() => {
       if (nextIdx < quizes.length) {
         setCurrent(nextIdx);
