@@ -36,17 +36,5 @@
 4. **결과 화면 (`Results.js`)**: 조건부 렌더링을 통해 50점 이상 획득 시 화면 전체에 Confetti(꽃가루) 효과 발생
 5. **해설 화면 (`Review.js`)**: 이전/다음 버튼 네비게이션과 정답 문장 하이라이팅 기능 제공
 
-## 로컬 실행 방법
-
-이 프로젝트는 [Create React App]으로 생성되었습니다.
-
-### 1. 패키지 설치
-```bash
-npm install
-```
-
-### 2. 개발 서버 실행
-```bash
-npm start
-```
-- 브라우저에서 [http://localhost:3000](http://localhost:3000)으로 접속하여 앱을 확인할 수 있습니다.
+## 링크
+https://ifmoon.vercel.app/
